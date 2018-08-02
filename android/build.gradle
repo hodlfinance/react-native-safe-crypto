@@ -17,16 +17,39 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_shared'
+            }
+        }
+
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            abiFilters 'armeabi-v7a', 'x86'
+        }
+
     }
     lintOptions {
         abortOnError false
     }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    // If you want Gradle to package prebuilt native libraries
+    // with your APK, modify the default source set configuration
+    // to include the directory of your prebuilt .so files as follows.
     sourceSets {
         main {
-            jniLibs.srcDir file('jni/libs/')
+            jniLibs.srcDirs 'jni/libs/'
         }
     }
 }
@@ -36,6 +59,6 @@ repositories {
 }
 
 dependencies {
-    compile "com.lambdaworks:scrypt:1.4.0"
     compile 'com.facebook.react:react-native:+'
 }
+  

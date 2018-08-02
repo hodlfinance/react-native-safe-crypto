@@ -1,6 +1,6 @@
 {
   "name": "react-native-safe-crypto",
-  "version": "1.0.1",
+  "version": "1.5.0",
   "description": "",
   "keywords": [
     "react-native"
@@ -13,9 +13,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "buffer": "^5.0.8",
     "rfc4648": "^1.0.0"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "^0.47.0"
   }
 }
