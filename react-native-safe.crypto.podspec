@@ -1,17 +1,31 @@
-require 'json'
-package_json = JSON.parse(File.read('package.json'))
+require "json"
+
+package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
+  s.name         = package["name"]
+  s.version      = package["version"]
+  s.summary      = package["description"]
+  s.homepage     = package["homepage"]
+  s.license      = package["license"]
+  s.authors      = package["author"]
 
-  s.name           = "react-native-safe-crypto"
-  s.version        = package_json["version"]
-  s.summary        = package_json["description"]
-  s.license        = package_json["license"]
-  s.homepage       = "https://github.com/WoeOm/react-native-safe-crypto"
-  s.author         = { package_json["author"] => package_json["author"] }
-  s.platform       = :ios, "7.0"
-  s.source         = { :git => "#{package_json["repository"]["url"]}" }
-  s.source_files   = '*.{h,m}'
-  s.dependency 'React'
+  s.platform = :ios, "8.0"
+  s.requires_arc = true
+  s.source = {
+    :git => "https://github.com/WoeOm/react-native-safe-crypto.git",
+    :tag => "v#{s.version}"
+  }
+  s.source_files = "ios/**/*.{h,m}"
+  s.vendored_libraries =
+    "ios/Libraries/libboost_system.a",
+    "ios/Libraries/libboost_thread.a",
+    "ios/Libraries/libcrypto.a",
+    "ios/Libraries/libmymonerocorecpp.a",
+    "ios/Libraries/libnativecrypto.a",
+    "ios/Libraries/libsecp256k1.a",
+    "ios/Libraries/libssl.a",
+    "ios/Libraries/libz.a"
 
+  s.dependency "React"
 end
