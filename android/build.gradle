@@ -53,7 +53,7 @@ android {
     // to include the directory of your prebuilt .so files as follows.
     sourceSets {
         main {
-            jniLibs.srcDirs 'jni/libs/'
+            // jniLibs.srcDirs 'jni/libs/'
         }
     }
 }
